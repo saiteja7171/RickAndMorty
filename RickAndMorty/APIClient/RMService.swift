@@ -24,13 +24,11 @@ final class RMService {
             completion(.failure(RMServiceError.failedURLRequest))
             return
         }
-        
         let task = URLSession.shared.dataTask(with: urlRequest) { data, _, error in
             guard let data = data, error == nil else {
                 completion(.failure(error ?? RMServiceError.failedToGetData))
                 return
             }
-            
             do {
                 let decodedData = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(decodedData))
@@ -40,7 +38,7 @@ final class RMService {
         }
         task.resume()
     }
-        
+    
     private func request(from rmRequest: RMRequest) -> URLRequest? {
         guard let url = rmRequest.url else { return nil }
         var request = URLRequest(url: url)
