@@ -13,6 +13,14 @@ final class RMEpisodeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Episode"
+        RMService.shared.execute(RMRequest.listEpisodeRequest, expecting: RMGetAllEpisodeResponse.self) { result in
+            switch result {
+            case .success(let model):
+                print(model)
+            case .failure(let error):
+                print(error)
+            }
+        }
         
     }
     

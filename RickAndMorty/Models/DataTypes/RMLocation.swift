@@ -18,4 +18,4 @@ struct RMLocation: Codable {
 }
 
 
-
+ 

@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+enum RMEndpoint: String {
+    case character = "character"
+    case location  = "location"
+    case episode   = "episode"
+}
+
