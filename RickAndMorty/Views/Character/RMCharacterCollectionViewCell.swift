@@ -99,6 +99,7 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
         statusLabel.text = viewModel.characterStatusText
         
         imageTask?.cancel()
+        imageView.image = nil
         imageTask = Task { [weak self] in
             do {
                 let data = try await viewModel.fetchImage()   // async/await API

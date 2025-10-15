@@ -46,14 +46,15 @@ final class RMCharacterCollectionViewCellViewModel: Hashable, Equatable {
         guard let url = characterImageURL else {
             throw URLError(.badURL)
         }
-        let request = URLRequest(url: url)
-        let (data, response) = try await URLSession.shared.data(for: request)
-
-        guard let httpResponse = response as? HTTPURLResponse,
-              200..<300 ~= httpResponse.statusCode else {
-            throw URLError(.badServerResponse)
-        }
-        return data
+        return try await RMImageLoader.shared.loadImage(url)
+//        let request = URLRequest(url: url)
+//        let (data, response) = try await URLSession.shared.data(for: request)
+//
+//        guard let httpResponse = response as? HTTPURLResponse,
+//              200..<300 ~= httpResponse.statusCode else {
+//            throw URLError(.badServerResponse)
+//        }
+//        return data
     }
     
     static func == (lhs: RMCharacterCollectionViewCellViewModel, rhs: RMCharacterCollectionViewCellViewModel) -> Bool {
