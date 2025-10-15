@@ -99,6 +99,7 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
         statusLabel.text = viewModel.characterStatusText
         
         imageTask?.cancel()
+        imageView.image = nil
         imageTask = Task { [weak self] in
             do {
                 let data = try await viewModel.fetchImage()   // async/await API
@@ -109,13 +110,6 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
             } catch is CancellationError {
                 // Task was cancelled (e.g. cell reused) — ignore silently
                 return
-
-            } catch let urlError as URLError {
-                // Network or bad URL issues
-                print("🔴 Image load failed: \(urlError.code.rawValue) – \(urlError.localizedDescription)")
-                await MainActor.run {
-                    self?.imageView.image = UIImage(systemName: "exclamationmark.triangle")
-                }
 
             } catch {
                 // Any other unexpected error

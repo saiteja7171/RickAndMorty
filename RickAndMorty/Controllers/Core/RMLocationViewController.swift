@@ -13,7 +13,7 @@ final class RMLocationViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Location"
-        RMService.shared.execute(RMRequest.listLocationRequest, expecting: RMGetAllLocationResponse.self) { result in
+        RMService.shared.execute(RMRequest.listLocationsRequest, expecting: RMGetAllLocationResponse.self) { result in
             switch result {
             case .success(let model):
                 print(model)

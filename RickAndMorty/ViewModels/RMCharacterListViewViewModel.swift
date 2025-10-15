@@ -36,7 +36,7 @@ final class RMCharacterListViewViewModel: NSObject {
     private var apiInfo: RMGetAllCharacterResponse.Info? = nil
     
     public func fetchCharacters() {
-        RMService.shared.execute(.listCharatersRequest, expecting: RMGetAllCharacterResponse.self) { [weak self] result in
+        RMService.shared.execute(.listCharactersRequests, expecting: RMGetAllCharacterResponse.self) { [weak self] result in
             
             switch result {
             case .success(let responseModel):
